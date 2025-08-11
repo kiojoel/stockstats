@@ -1,0 +1,2 @@
+# stockstats
+Simple stock analysis
