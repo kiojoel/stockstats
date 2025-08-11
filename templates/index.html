@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Analyzer</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Stock Analyzer</h1>
+      <p>
+        Enter a US stock ticker and a date range to get its performance
+        statistics and price chart.
+      </p>
+
+      <form action="{{ url_for('results') }}" method="POST" class="input-form">
+        <div class="form-group">
+          <label for="ticker">Stock Ticker</label>
+          <input
+            type="text"
+            id="ticker"
+            name="ticker"
+            required
+            value="{{ last_ticker or '' }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="start_date">Start Date</label>
+          <input
+            type="date"
+            id="start_date"
+            name="start_date"
+            required
+            value="{{ default_start }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="end_date">End Date</label>
+          <input
+            type="date"
+            id="end_date"
+            name="end_date"
+            required
+            value="{{ default_end }}"
+          />
+        </div>
+        <button type="submit">Analyze</button>
+      </form>
+
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

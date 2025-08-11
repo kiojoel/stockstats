@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results for {{ ticker }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Analysis for {{ ticker }}</h1>
+
+      <div class="stats-box">
+        <h2>Performance Summary</h2>
+        <p>
+          <strong>Analysis Period:</strong> {{ start_date }} to {{ end_date }}
+        </p>
+        <p>
+          <strong>Highest Price:</strong> ${{ "%.2f"|format(stats.highest) }}
+        </p>
+        <p>
+          <strong>Average Closing Price:</strong> ${{
+          "%.2f"|format(stats.average) }}
+        </p>
+        <p>
+          <strong>Total Volume Traded:</strong> {{ "{:,}".format(stats.volume)
+          }}
+        </p>
+      </div>
+
+      <div class="plot-box">
+        <h2>Price Chart</h2>
+        <img
+          src="data:image/png;base64,{{ plot_url }}"
+          alt="Price chart for {{ ticker }}"
+        />
+      </div>
+
+      <a href="{{ url_for('home') }}" class="back-link"
+        >Analyze another stock</a
+      >
+    </div>
+  </body>
+</html>
